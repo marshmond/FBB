@@ -121,7 +121,7 @@ function lineText(p) {
 }
 const templateRecap = (players) => {
   const played = players.filter((p) => p.played);
-  return played.length ? played.map(lineText).join('. ') + '.' : 'No one on this roster played last night.';
+  return played.length ? played.map(lineText).join('\n') : 'No one on this roster played last night.';
 };
 async function claudeRecap(team, players) {
   const played = players.filter((p) => p.played);
@@ -131,8 +131,10 @@ async function claudeRecap(team, players) {
     method: 'POST',
     headers: { 'x-api-key': process.env.ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
     body: JSON.stringify({ model: MODEL, max_tokens: 500, messages: [{ role: 'user', content:
-      `Write a punchy 3-5 sentence nightly fantasy baseball recap for my team "${team}" for ${date}. ` +
-      `Lead with the biggest performances, flag minor leaguers (levels like AAA/AA) as prospects, mention notable duds briefly. ` +
+      `Write a nightly fantasy baseball recap for my team "${team}" for ${date}. ` +
+      `Format: one punchy headline sentence, a blank line, then EXACTLY one line per player who played (every player listed below), ` +
+      `each line starting with the player's name followed by a colon, then their stat line and a few words of color. ` +
+      `Order the lines from best to worst night. Flag minor leaguers (levels like AAA/AA) with "(prospect)". No bullets, no markdown. ` +
       `Use only these facts, do not invent anything:\n${facts}` }] }),
   });
   if (!r.ok) throw new Error(`Claude API ${r.status}: ${await r.text()}`);
