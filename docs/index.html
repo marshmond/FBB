@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dugout Digest</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#1c2230;--mute:#667085;--line:#e3e6eb;--accent:#1d5fd1;--good:#127a3e;--bad:#b42318}
+@media(prefers-color-scheme:dark){:root{--bg:#10131a;--card:#181c26;--ink:#e8ebf2;--mute:#98a2b3;--line:#2a3040;--accent:#6ea2ff;--good:#4cc27f;--bad:#f27a70}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:980px;margin:0 auto;padding:16px}
+header{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin-bottom:12px}
+h1{font-size:20px;margin:0}
+select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit}
+nav{display:flex;gap:6px;margin-bottom:14px}
+nav button{flex:1;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px;font:inherit;cursor:pointer}
+nav button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.card h2{font-size:16px;margin:0 0 4px}
+.meta{color:var(--mute);font-size:13px}
+.recap{margin:8px 0 0}
+.scroll{overflow-x:auto;margin-top:10px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;white-space:nowrap}
+th,td{padding:5px 8px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--card)}
+th{color:var(--mute);font-weight:600;cursor:pointer;user-select:none}
+.pos{color:var(--good)}.neg{color:var(--bad)}
+.tag{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:6px;padding:0 5px;margin-left:5px;color:var(--mute)}
+.bench{opacity:.55}
+.empty{color:var(--mute);padding:30px;text-align:center}
+</style>
+</head>
+<body>
+<main>
+<header><h1>Dugout Digest</h1><label class="meta">Night of <select id="date"></select></label></header>
+<nav id="tabs"></nav>
+<div id="view"><p class="empty">Loading...</p></div>
+</main>
+<script>
+const TABS = ['Recap', 'Rosters', 'Combined'];
+let tab = 'Recap', day = null, sortKey = 'pts', sortDir = -1, leagueFilter = 'all';
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const fmt = (n) => (n === null || n === undefined ? '' : Number.isInteger(n) ? n : n.toFixed(1));
+const cls = (n) => (n > 0 ? 'pos' : n < 0 ? 'neg' : '');
+const levels = (p) => [...new Set(p.games.map((g) => g.level))].map((l) => `<span class="tag">${esc(l)}</span>`).join('');
+const isPitcher = (p) => p.season.pit.g > p.season.bat.g || (p.info.pos === 'P');
+
+async function load(date) {
+  day = await (await fetch(`data/days/${date}.json`)).json();
+  render();
+}
+
+function render() {
+  $('#tabs').innerHTML = TABS.map((t) => `<button class="${t === tab ? 'on' : ''}" onclick="tab='${t}';render()">${t}</button>`).join('');
+  $('#view').innerHTML = !day ? '<p class="empty">No data yet.</p>' : { Recap: recapView, Rosters: rostersView, Combined: combinedView }[tab]();
+}
+
+function recapView() {
+  return day.leagues.map((l) => {
+    const top = l.players.filter((p) => p.played && !p.bench).sort((a, b) => (b.pts ?? 0) - (a.pts ?? 0)).slice(0, 3);
+    return `<div class="card"><h2>${esc(l.name)}</h2>
+      <div class="meta">${esc(l.platform || '')}${l.scored ? ` &middot; <b class="${cls(l.totalPts)}">${fmt(l.totalPts)} pts</b>` : ''}</div>
+      <p class="recap">${esc(l.recap)}</p>
+      ${top.length && l.scored ? `<div class="meta">Top: ${top.map((p) => `${esc(p.info.name)} (${fmt(p.pts)})`).join(', ')}</div>` : ''}</div>`;
+  }).join('');
+}
+
+function batRow(p) {
+  const d = p.day.bat, s = p.season.bat;
+  return `<tr class="${p.bench ? 'bench' : ''}"><td>${esc(p.info.name)}${levels(p)}</td><td>${esc(p.info.pos)}</td>
+    <td>${p.games.filter((g) => g.kind === 'bat').map((g) => esc(g.line)).join(' / ') || '-'}</td>
+    <td>${fmt(p.pts)}</td><td>${s.g}</td><td>${s.avg}</td><td>${s.homeRuns}</td><td>${s.rbi}</td><td>${s.stolenBases}</td><td>${s.runs}</td></tr>`;
+}
+function pitRow(p) {
+  const s = p.season.pit;
+  return `<tr class="${p.bench ? 'bench' : ''}"><td>${esc(p.info.name)}${levels(p)}</td><td>${esc(p.info.pos)}</td>
+    <td>${p.games.filter((g) => g.kind === 'pit').map((g) => `${g.ip} IP ${g.stat.earnedRuns} ER ${g.stat.strikeOuts} K`).join(' / ') || '-'}</td>
+    <td>${fmt(p.pts)}</td><td>${s.g}</td><td>${s.inningsPitched}</td><td>${s.era}</td><td>${s.whip}</td><td>${s.strikeOuts}</td><td>${s.wins}-${s.losses}</td></tr>`;
+}
+const BAT_HEAD = '<th>Player</th><th>Pos</th><th>Last night</th><th>Pts</th><th>G</th><th>AVG</th><th>HR</th><th>RBI</th><th>SB</th><th>R</th>';
+const PIT_HEAD = '<th>Player</th><th>Pos</th><th>Last night</th><th>Pts</th><th>G</th><th>IP</th><th>ERA</th><th>WHIP</th><th>K</th><th>W-L</th>';
+
+function rostersView() {
+  return day.leagues.map((l) => {
+    const bats = l.players.filter((p) => !isPitcher(p)), pits = l.players.filter(isPitcher);
+    return `<div class="card"><h2>${esc(l.name)}</h2>
+      <div class="scroll"><table><thead><tr>${BAT_HEAD}</tr></thead><tbody>${bats.map(batRow).join('')}</tbody></table></div>
+      ${pits.length ? `<div class="scroll"><table><thead><tr>${PIT_HEAD}</tr></thead><tbody>${pits.map(pitRow).join('')}</tbody></table></div>` : ''}</div>`;
+  }).join('');
+}
+
+function combinedView() {
+  // One row per unique player, tagged with the leagues they appear in.
+  const map = new Map();
+  for (const l of day.leagues) {
+    if (leagueFilter !== 'all' && l.id !== leagueFilter) continue;
+    for (const p of l.players) {
+      const e = map.get(p.info.id) || { p, leagues: [] };
+      e.leagues.push(l.name);
+      map.set(p.info.id, e);
+    }
+  }
+  const rows = [...map.values()].map((e) => ({ ...e, pts: e.p.pts, sp: e.p.seasonPts, name: e.p.info.name, hr: e.p.season.bat.homeRuns, k: e.p.season.pit.strikeOuts }));
+  const keyOf = { pts: 'pts', season: 'sp', name: 'name', hr: 'hr', k: 'k' }[sortKey];
+  rows.sort((a, b) => (a[keyOf] > b[keyOf] ? 1 : a[keyOf] < b[keyOf] ? -1 : 0) * sortDir);
+  const t = rows.reduce((a, r) => { const b = r.p.season.bat, p = r.p.season.pit; a.hr += b.homeRuns; a.rbi += b.rbi; a.sb += b.stolenBases; a.k += p.strikeOuts; a.w += p.wins; a.sv += p.saves; return a; }, { hr: 0, rbi: 0, sb: 0, k: 0, w: 0, sv: 0 });
+  const th = (label, key) => `<th onclick="sortKey='${key}';sortDir=sortDir*-1;render()">${label}</th>`;
+  return `<div class="card"><h2>All rosters combined</h2>
+    <div class="meta"><select onchange="leagueFilter=this.value;render()"><option value="all">All leagues</option>${day.leagues.map((l) => `<option value="${esc(l.id)}" ${l.id === leagueFilter ? 'selected' : ''}>${esc(l.name)}</option>`).join('')}</select>
+    &nbsp;${rows.length} players &middot; season totals: ${t.hr} HR, ${t.rbi} RBI, ${t.sb} SB, ${t.k} K, ${t.w} W, ${t.sv} SV</div>
+    <div class="scroll"><table><thead><tr>${th('Player', 'name')}<th>Leagues</th><th>Last night</th>${th('Night pts', 'pts')}${th('Season pts', 'season')}${th('HR', 'hr')}${th('K', 'k')}</tr></thead><tbody>
+    ${rows.map((r) => `<tr><td>${esc(r.name)}${levels(r.p)}</td><td>${esc(r.leagues.join(', '))}</td>
+      <td>${r.p.games.map((g) => esc(g.kind === 'pit' ? `${g.ip} IP ${g.stat.earnedRuns} ER ${g.stat.strikeOuts} K` : g.line)).join(' / ') || '-'}</td>
+      <td class="${cls(r.pts)}">${fmt(r.pts)}</td><td>${fmt(r.sp)}</td><td>${r.hr}</td><td>${r.k}</td></tr>`).join('')}
+    </tbody></table></div></div>`;
+}
+
+(async () => {
+  try {
+    const { dates } = await (await fetch('data/index.json')).json();
+    $('#date').innerHTML = dates.map((d) => `<option>${d}</option>`).join('');
+    $('#date').onchange = (e) => load(e.target.value);
+    if (dates.length) await load(dates[0]); else render();
+  } catch (e) { $('#view').innerHTML = '<p class="empty">No data yet. Run the nightly workflow once.</p>'; }
+})();
+</script>
+</body>
+</html>

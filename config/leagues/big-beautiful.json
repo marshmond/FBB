@@ -1,0 +1,274 @@
+{
+  "id": "big-beautiful",
+  "name": "Big Beautiful League S2 (Red Sox)",
+  "platform": "Fantrax",
+  "scoring": {
+    "bat.singles": 1,
+    "bat.doubles": 2,
+    "bat.triples": 3,
+    "bat.homeRuns": 4,
+    "bat.runs": 1,
+    "bat.rbi": 1,
+    "bat.baseOnBalls": 1,
+    "bat.hitByPitch": 1,
+    "bat.stolenBases": 2,
+    "field.errors": -1,
+    "field.passedBalls": -1,
+    "field.sba": -0.5,
+    "field.assists": 1,
+    "pit.inningsPitched": 2,
+    "pit.strikeOuts": 1,
+    "pit.earnedRuns": -1,
+    "pit.h": -0.5,
+    "pit.baseOnBalls": -0.5,
+    "pit.hitBatsmen": -0.5,
+    "pit.holds": 4,
+    "pit.saves": 7,
+    "bat.caughtStealing": -1,
+    "field.csa": 3,
+    "pit.wins": 3,
+    "pit.qs": 4,
+    "pit.qa7": 3
+  },
+  "players": [
+    {
+      "name": "Harry Ford",
+      "slot": "active"
+    },
+    {
+      "name": "Charles McAdoo",
+      "slot": "active"
+    },
+    {
+      "name": "Jonah Cox",
+      "slot": "active"
+    },
+    {
+      "name": "Andrew Vaughn",
+      "slot": "active"
+    },
+    {
+      "name": "Trey Sweeney",
+      "slot": "active"
+    },
+    {
+      "name": "Jordan Lawlar",
+      "slot": "active"
+    },
+    {
+      "name": "Max Clark",
+      "slot": "active"
+    },
+    {
+      "name": "Roman Anthony",
+      "slot": "active"
+    },
+    {
+      "name": "Oneil Cruz",
+      "slot": "active"
+    },
+    {
+      "name": "Daniel Espino",
+      "slot": "active"
+    },
+    {
+      "name": "Adrian Houser",
+      "slot": "active"
+    },
+    {
+      "name": "Rhett Lowder",
+      "slot": "active"
+    },
+    {
+      "name": "Drew Thorpe",
+      "slot": "active"
+    },
+    {
+      "name": "José Fermín",
+      "slot": "active",
+      "mlbId": 820862
+    },
+    {
+      "name": "Ryan Yarbrough",
+      "slot": "active"
+    },
+    {
+      "name": "J.C. Escarra",
+      "slot": "reserve"
+    },
+    {
+      "name": "Brady House",
+      "slot": "reserve"
+    },
+    {
+      "name": "Colt Keith",
+      "slot": "reserve"
+    },
+    {
+      "name": "Jahmai Jones",
+      "slot": "reserve"
+    },
+    {
+      "name": "Myles Straw",
+      "slot": "reserve"
+    },
+    {
+      "name": "Ryan Waldschmidt",
+      "slot": "reserve"
+    },
+    {
+      "name": "Eli White",
+      "slot": "reserve"
+    },
+    {
+      "name": "Tyler O'Neill",
+      "slot": "reserve"
+    },
+    {
+      "name": "Johan Oviedo",
+      "slot": "reserve"
+    },
+    {
+      "name": "Ricky Tiedemann",
+      "slot": "reserve"
+    },
+    {
+      "name": "Gordon Graceffo",
+      "slot": "reserve"
+    },
+    {
+      "name": "Ronny Henriquez",
+      "slot": "reserve"
+    },
+    {
+      "name": "Yuki Matsui",
+      "slot": "reserve"
+    },
+    {
+      "name": "DL Hall",
+      "slot": "reserve"
+    },
+    {
+      "name": "David Morgan",
+      "slot": "reserve"
+    },
+    {
+      "name": "Caden Bodine",
+      "slot": "minors"
+    },
+    {
+      "name": "Juan Ortuno",
+      "slot": "minors"
+    },
+    {
+      "name": "Cam Collier",
+      "slot": "minors"
+    },
+    {
+      "name": "Joswa Lugo",
+      "slot": "minors",
+      "mlbId": 815915
+    },
+    {
+      "name": "Cristian Hernandez",
+      "slot": "minors"
+    },
+    {
+      "name": "Luis Hernández",
+      "slot": "minors",
+      "mlbId": 836582
+    },
+    {
+      "name": "Aidan Miller",
+      "slot": "minors"
+    },
+    {
+      "name": "Bryce Rainer",
+      "slot": "minors"
+    },
+    {
+      "name": "Yandel Ricardo",
+      "slot": "minors"
+    },
+    {
+      "name": "Jordan Yost",
+      "slot": "minors"
+    },
+    {
+      "name": "Ethan Conrad",
+      "slot": "minors"
+    },
+    {
+      "name": "Nauris De La Cruz",
+      "slot": "minors"
+    },
+    {
+      "name": "Kristian Robinson",
+      "slot": "minors"
+    },
+    {
+      "name": "Ryan Wideman",
+      "slot": "minors"
+    },
+    {
+      "name": "George Wolkow",
+      "slot": "minors"
+    },
+    {
+      "name": "Anthony Eyanson",
+      "slot": "minors"
+    },
+    {
+      "name": "Michael Forret",
+      "slot": "minors"
+    },
+    {
+      "name": "Rory Fox",
+      "slot": "minors"
+    },
+    {
+      "name": "Franklin Gomez",
+      "slot": "minors"
+    },
+    {
+      "name": "Trey Gregory-Alford",
+      "slot": "minors"
+    },
+    {
+      "name": "Melvin Hernandez",
+      "slot": "minors"
+    },
+    {
+      "name": "Cam Leiter",
+      "slot": "minors"
+    },
+    {
+      "name": "Wei-En Lin",
+      "slot": "minors"
+    },
+    {
+      "name": "Karson Milbrandt",
+      "slot": "minors"
+    },
+    {
+      "name": "Yordanny Monegro",
+      "slot": "minors"
+    },
+    {
+      "name": "Riley Quick",
+      "slot": "minors"
+    },
+    {
+      "name": "Patrick Reilly",
+      "slot": "minors"
+    },
+    {
+      "name": "Hunter Parks",
+      "slot": "minors"
+    },
+    {
+      "name": "JT Quinn",
+      "slot": "minors"
+    }
+  ]
+}

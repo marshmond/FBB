@@ -1,0 +1,268 @@
+{
+  "id": "hot-stove",
+  "name": "Hot Stove League S2 (Rockies)",
+  "platform": "Fantrax",
+  "scoring": {
+    "bat.singles": 1,
+    "bat.doubles": 2,
+    "bat.triples": 3,
+    "bat.homeRuns": 4,
+    "bat.runs": 1,
+    "bat.rbi": 1,
+    "bat.baseOnBalls": 1,
+    "bat.hitByPitch": 1,
+    "bat.stolenBases": 2,
+    "field.errors": -1,
+    "field.passedBalls": -1,
+    "field.sba": -0.5,
+    "field.assists": 1,
+    "pit.inningsPitched": 2,
+    "pit.strikeOuts": 1,
+    "pit.earnedRuns": -1,
+    "pit.h": -0.5,
+    "pit.baseOnBalls": -0.5,
+    "pit.hitBatsmen": -0.5,
+    "pit.holds": 4,
+    "pit.saves": 7,
+    "field.csa": 2.5,
+    "pit.wins": 5,
+    "pit.qs": 5
+  },
+  "players": [
+    {
+      "name": "Sean Murphy",
+      "slot": "active"
+    },
+    {
+      "name": "Yandy Diaz",
+      "slot": "active"
+    },
+    {
+      "name": "Jeff McNeil",
+      "slot": "active"
+    },
+    {
+      "name": "Ryan McMahon",
+      "slot": "active"
+    },
+    {
+      "name": "CJ Abrams",
+      "slot": "active"
+    },
+    {
+      "name": "Andrew Benintendi",
+      "slot": "active"
+    },
+    {
+      "name": "Evan Carter",
+      "slot": "active"
+    },
+    {
+      "name": "Ryan Ward",
+      "slot": "active"
+    },
+    {
+      "name": "Leody Taveras",
+      "slot": "active"
+    },
+    {
+      "name": "Kyle Harrison",
+      "slot": "active"
+    },
+    {
+      "name": "Sean Newcomb",
+      "slot": "active"
+    },
+    {
+      "name": "Cristian Javier",
+      "slot": "active"
+    },
+    {
+      "name": "Garrett Cleavinger",
+      "slot": "active"
+    },
+    {
+      "name": "Brent Headrick",
+      "slot": "active"
+    },
+    {
+      "name": "Abner Uribe",
+      "slot": "active"
+    },
+    {
+      "name": "Garrett Whitlock",
+      "slot": "active"
+    },
+    {
+      "name": "Tyler Stephenson",
+      "slot": "reserve"
+    },
+    {
+      "name": "Kyle Stowers",
+      "slot": "reserve"
+    },
+    {
+      "name": "Connor Norby",
+      "slot": "reserve"
+    },
+    {
+      "name": "Jacob Gonzalez",
+      "slot": "reserve"
+    },
+    {
+      "name": "John Peck",
+      "slot": "reserve"
+    },
+    {
+      "name": "Jake Meyers",
+      "slot": "reserve"
+    },
+    {
+      "name": "George Valera",
+      "slot": "reserve"
+    },
+    {
+      "name": "Cody Bolton",
+      "slot": "reserve"
+    },
+    {
+      "name": "Jared Koenig",
+      "slot": "reserve"
+    },
+    {
+      "name": "Daniel Palencia",
+      "slot": "reserve"
+    },
+    {
+      "name": "Evan Phillips",
+      "slot": "reserve",
+      "mlbId": 623465
+    },
+    {
+      "name": "Austin Martin",
+      "slot": "ir"
+    },
+    {
+      "name": "Kutter Crawford",
+      "slot": "ir"
+    },
+    {
+      "name": "Clarke Schmidt",
+      "slot": "ir"
+    },
+    {
+      "name": "Ben Brown",
+      "slot": "ir"
+    },
+    {
+      "name": "Fernando Cruz",
+      "slot": "ir"
+    },
+    {
+      "name": "Caden Bodine",
+      "slot": "minors"
+    },
+    {
+      "name": "Johanfran Garcia",
+      "slot": "minors",
+      "mlbId": 703190
+    },
+    {
+      "name": "Jeferson Quero",
+      "slot": "minors"
+    },
+    {
+      "name": "JD Dix",
+      "slot": "minors"
+    },
+    {
+      "name": "Elian Rosario",
+      "slot": "minors",
+      "mlbId": 836589
+    },
+    {
+      "name": "Bruin Agbayani",
+      "slot": "minors"
+    },
+    {
+      "name": "Johenssy Colome",
+      "slot": "minors",
+      "mlbId": 836584
+    },
+    {
+      "name": "Leo De Vries",
+      "slot": "minors"
+    },
+    {
+      "name": "Janiel Hernandez",
+      "slot": "minors",
+      "mlbId": 837783
+    },
+    {
+      "name": "Eli Willits",
+      "slot": "minors"
+    },
+    {
+      "name": "Angeibel Gomez",
+      "slot": "minors",
+      "mlbId": 825412
+    },
+    {
+      "name": "Mac Horvath",
+      "slot": "minors"
+    },
+    {
+      "name": "Walker Jenkins",
+      "slot": "minors"
+    },
+    {
+      "name": "Wilberson De Pena",
+      "slot": "minors"
+    },
+    {
+      "name": "Mason Adams",
+      "slot": "minors"
+    },
+    {
+      "name": "Rory Fox",
+      "slot": "minors"
+    },
+    {
+      "name": "Cooper Hjerpe",
+      "slot": "minors"
+    },
+    {
+      "name": "Bryce Mayer",
+      "slot": "minors"
+    },
+    {
+      "name": "Riley Quick",
+      "slot": "minors"
+    },
+    {
+      "name": "Travis Sykora",
+      "slot": "minors"
+    },
+    {
+      "name": "Jonah Tong",
+      "slot": "minors",
+      "mlbId": 804636
+    },
+    {
+      "name": "Levi Wells",
+      "slot": "minors"
+    },
+    {
+      "name": "Reggie Crawford",
+      "slot": "minors"
+    },
+    {
+      "name": "Luis Mey",
+      "slot": "minors"
+    },
+    {
+      "name": "Tyson Neighbors",
+      "slot": "minors"
+    }
+  ]
+}
